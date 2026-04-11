@@ -1,2 +1,2 @@
 # Qrypt
-We use Quantum Oblvious Transfer to perform secure quantum multi-party computation and demonstrate an application - a quantum secure anonymous electronic voting machine.
+We use Quantum Oblivious Transfer to perform secure multi-party computation with quantum-secure key distribution to implement a quantum secure electronic voting machine.
