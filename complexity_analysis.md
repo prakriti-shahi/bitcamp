@@ -16,8 +16,8 @@
 
 | Metric | Complexity |
 |--------|------------|
-| **Total classical work (time)** | **O(n · m · log n)** |
-| **Total quantum gate depth (BBCS circuit rounds)** | **O(n · m · log n)** |
+| **Total classical work (time)** | **O(m · n · log n)** |
+| **Total quantum gate depth (BBCS circuit rounds)** | **O(m · n · log n)** |
 
 ---
 
@@ -32,6 +32,7 @@ parameter, not a function of n or m). The k circuits run in parallel on the samp
 - Classical post-processing per call: O(k), absorbed into the constant
 
 > **Per-call cost: O(1) gate depth, O(1) classical work** (k is constant).
+We may expect k->1 as hardware noise decreases over time.
 
 ---
 
@@ -112,13 +113,13 @@ Orchestration loop: for each of the n voters, for each of the m candidates, call
 
 **Total AND gates / OT instances:**
 
-$$O(n \cdot m \cdot \log n)$$
+$$O(m \cdot n \cdot \log n)$$
 
 **Total classical work** (each OT call is O(1) after absorbing k):
 
-$$\boxed{O(n \cdot m \cdot \log n)}$$
+$$\boxed{O(m \cdot n \cdot \log n)}$$
 
 **Total BBCS quantum gate depth** (AND gates are sequential; each OT round has O(1)
 gate depth, but OT rounds themselves cannot be parallelised across the carry chain):
 
-$$\boxed{O(n \cdot m \cdot \log n)}$$
+$$\boxed{O(m \cdot n \cdot \log n)}$$
