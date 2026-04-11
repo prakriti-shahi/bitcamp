@@ -122,19 +122,3 @@ $$\boxed{O(n \cdot m \cdot \log n)}$$
 gate depth, but OT rounds themselves cannot be parallelised across the carry chain):
 
 $$\boxed{O(n \cdot m \cdot \log n)}$$
-
----
-
-## Dominant Bottleneck
-
-The **ripple-carry adder** in `add_vote` drives both results to the same
-O(n · m · log n) bound. Replacing it with a parallel-prefix adder (e.g.
-Kogge–Stone) would reduce the **depth** per voter from O(log n) to
-O(log log n), giving:
-
-| Metric | Ripple-carry (current) | Parallel-prefix (improved) |
-|--------|------------------------|---------------------------|
-| Classical work | O(n · m · log n) | O(n · m · log n) |
-| BBCS circuit depth | **O(n · m · log n)** | **O(n · m · log log n)** |
-
-Total gate *count* is unchanged; only depth is reduced.
