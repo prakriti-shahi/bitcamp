@@ -34,6 +34,12 @@ Then,
 
 and
 
+`npm install`
+
+to install Node.js.
+
+After this, you can launch the webpage with
+
 `npm run dev`
 
 This will start the frontend and the backend should be connected as well. In your terminal, you can click on the `localhost` link to access the webpage.
