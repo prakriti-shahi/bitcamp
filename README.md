@@ -26,7 +26,7 @@ Make sure the github repo is cloned if you haven't already done so. Ensure you s
 
 First, start the Python backend with
 
-`uvicorn app.main:app -- reload`
+`uvicorn app.main:app --reload`
 
 Then,
 

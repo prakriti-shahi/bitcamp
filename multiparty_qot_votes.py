@@ -1,7 +1,8 @@
+
 """
 Secure Anonymous Voting: Two-Server Model with ZKPs + Quantum OT
 ================================================================
-Qiskit 1.x implementation using Primitives V2.
+Qiskit implementation.
 
 Architecture:
   - Voters are Clients. They generate Zero-Knowledge Proofs (ZKPs) and 
@@ -15,8 +16,8 @@ Gates:
   AND — COSTLY: requires 2 BBCS quantum OTs (one per cross-term).
 """
 
-from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
-from qiskit.primitives import StatevectorSampler
+from qiskit import QuantumCircuit
+from qiskit_aer import AerSimulator
 import numpy as np
 import hashlib
 import secrets
@@ -25,52 +26,28 @@ from typing import List, Tuple, Dict
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# Layer 1: BB84 Quantum Channel (Modern Qiskit 1.x)
+# Layer 1: BB84 Quantum Channel
 # ═══════════════════════════════════════════════════════════════════════════════
 
 class QuantumBB84Channel:
-    """
-    Simulates BB84 photon transmission using Qiskit 1.x Primitives V2.
-    MEMORY SAFE: Simulates N independent 1-qubit circuits instead of one N-qubit circuit.
-    """
     def __init__(self, n_qubits: int):
         self.n = n_qubits
-        self.sampler = StatevectorSampler()
+        self.simulator = AerSimulator()
 
     def transmit(self, alice_bits, alice_bases, bob_bases):
-        circuits = []
-        
-        # Build N separate 1-qubit circuits
+        qc = QuantumCircuit(self.n, self.n)
         for i in range(self.n):
-            qr = QuantumRegister(1, 'q')
-            cr = ClassicalRegister(1, 'meas')
-            qc = QuantumCircuit(qr, cr)
-
-            # Alice: encode bit in chosen basis
             if alice_bits[i]:
-                qc.x(0)
+                qc.x(i)
             if alice_bases[i]:
-                qc.h(0)
-
-            # Bob: rotate to his measurement basis
+                qc.h(i)
             if bob_bases[i]:
-                qc.h(0)
-
-            # Measure
-            qc.measure(qr, cr)
-            circuits.append(qc)
-
-        # Run all N circuits in one batch
-        job = self.sampler.run(circuits, shots=1)
-        results = job.result()
-        
-        # Extract the single bit from each of the N circuits
-        measured_bits = []
-        for i in range(self.n):
-            bitstring = results[i].data.meas.get_bitstrings()[0]
-            measured_bits.append(int(bitstring))
-
-        return np.array(measured_bits)
+                qc.h(i)
+        qc.measure(range(self.n), range(self.n))
+        result = self.simulator.run(qc, shots=1).result()
+        counts = result.get_counts()
+        bitstring = list(counts.keys())[0]
+        return np.array([int(bitstring[self.n - 1 - i]) for i in range(self.n)])
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -294,7 +271,7 @@ def run_secure_verifiable_election(ballots: List[List[int]], candidates: List[st
 # Main - Interactive Execution
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def election():
+if __name__ == "__main__":
     np.random.seed(42)
 
     print("--- Election Setup ---")
@@ -341,6 +318,4 @@ def election():
 
     print("\n--- Starting Server Computation ---")
     run_secure_verifiable_election(ballots, candidates, security_param=48)
-
-if __name__ == "__main__":
-    election()
+ 
