@@ -19,9 +19,9 @@ Additionally, our team calculated the complexity of **EleQt's** main loop to be 
 
 Thus one may infer that the verification of a voting system with thousands of voters could be finished in less than a day on current noisy intermediate scale quantum (NISQ) computers. Further research could be aimed at lowering the computational complexity of the adder circuit by transpiling and optimizing the ripple adder circuit for the specific hardware.
 
-# Running the Webpage
+## Running the Webpage
 
-Make sure the github repo is cloned if you haven't already done so. Ensure you start in the root (bitcamp) directory. `npm` is required so make sure your system has this installed. For this, make sure that ***Node.js** is installed.
+Make sure the github repo is cloned if you haven't already done so, ensuring you start in the root (bitcamp) directory. `npm` and ***Node.js*** is required so make sure your system have these installed.
 
 
 First, start the Python backend with
