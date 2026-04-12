@@ -1,6 +1,6 @@
 # EleQt
 
-We use Quantum Oblivious Transfer to perform secure multi-party computation with Eckert-91 quantum-secure key distribution to implement a trustless, quantum secure electronic voting machine.
+We use Quantum Oblivious Transfer to perform secure multi-party computation with Ekert-91 quantum-secure key distribution to implement a trustless, quantum secure electronic voting machine.
 
 ## Requirements
 
