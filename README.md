@@ -21,7 +21,7 @@ Thus one may infer that the verification of a voting system with thousands of vo
 
 # Running the Webpage
 
-Make sure the github repo is cloned if you haven't already done so. Ensure you start in the root (bitcamp) directory. `npm` is required so make sure your system has this installed.
+Make sure the github repo is cloned if you haven't already done so. Ensure you start in the root (bitcamp) directory. `npm` is required so make sure your system has this installed. For this, make sure that ***Node.js** is installed.
 
 
 First, start the Python backend with
