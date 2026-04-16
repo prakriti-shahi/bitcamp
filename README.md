@@ -1,4 +1,4 @@
-# EleQt
+# EleQt - #2ND PLACE IN THE 2026 BITCAMP COMPUTATIONAL QUANTUM TRACK
 
 We use Quantum Oblivious Transfer to perform secure multi-party computation with Ekert-91 quantum-secure key distribution to implement a trustless, quantum secure electronic voting machine.
 
